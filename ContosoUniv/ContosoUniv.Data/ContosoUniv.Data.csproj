@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AspNetRoleClaims.cs" />
+    <Compile Remove="AspNetRoles.cs" />
+    <Compile Remove="AspNetUserClaims.cs" />
+    <Compile Remove="AspNetUserLogins.cs" />
+    <Compile Remove="AspNetUserRoles.cs" />
+    <Compile Remove="AspNetUsers.cs" />
+    <Compile Remove="AspNetUserTokens.cs" />
+    <Compile Remove="Course.cs" />
+    <Compile Remove="CourseInstructor.cs" />
+    <Compile Remove="Department.cs" />
+    <Compile Remove="IdentityPerson.cs" />
+    <Compile Remove="OfficeAssignment.cs" />
+    <Compile Remove="OnlineCourse.cs" />
+    <Compile Remove="OnsiteCourse.cs" />
+    <Compile Remove="Person.cs" />
+    <Compile Remove="StudentGrade.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+  </ItemGroup>
+
+</Project>
