@@ -38,13 +38,6 @@ namespace ContosoUniv.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create( RoleCreateMdl model )
         {
-            //if ( await _roleManager.RoleExistsAsync( model.RoleName ) )
-            //{
-            //    ModelState.AddModelError( "", "Role already exists. " );
-            //    model.LoadPermitList();
-            //    return View( model );
-            //}
-
             var role = new IdentityRole { Name = model.RoleName };
             var result = await _roleManager.CreateAsync( role );
             if ( result.Succeeded )

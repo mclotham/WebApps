@@ -43,8 +43,9 @@ namespace ContosoUniv.WebApp
 
             services.AddControllersWithViews();
 
+#if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
-
+#endif
             services.AddAuthorization( options =>
             {
                 foreach ( var claim in Permits.AllPermits )

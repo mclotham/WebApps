@@ -19,7 +19,7 @@ namespace ContosoUniv.WebApp.Models.Role
 
         public void LoadPermitList( string selectedItems = "" )
         {
-            selectedItems = selectedItems ?? "";
+            selectedItems ??= "";
             var selectedList = selectedItems.Split( new char[] { ';' } );
             PermitList = Permits.AllPermits.Select( p => new SelectListItem
             {
