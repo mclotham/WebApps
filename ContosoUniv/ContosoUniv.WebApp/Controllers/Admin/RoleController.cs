@@ -1,5 +1,7 @@
 ﻿using ContosoUniv.Data;
+using ContosoUniv.WebApp.Authorization;
 using ContosoUniv.WebApp.Models.Role;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,6 +29,7 @@ namespace ContosoUniv.WebApp.Controllers
         }
 
         [HttpGet]
+        [Authorize( Policy = Permits.Admin.RoleCreate )]
         public IActionResult Create()
         {
             var model = new RoleCreateMdl();
@@ -36,6 +39,7 @@ namespace ContosoUniv.WebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize( Policy = Permits.Admin.RoleCreate )]
         public async Task<IActionResult> Create( RoleCreateMdl model )
         {
             var role = new IdentityRole { Name = model.RoleName };

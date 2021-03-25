@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
 {
@@ -20,14 +21,17 @@ namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -83,7 +87,22 @@ namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation($"User {User.Identity.Name} logged in.");
+                    var user = await _userManager.FindByNameAsync( Input.Username );
+                    var roles = await _userManager.GetRolesAsync( user );
+                    var roleClaims = new List<Claim>();
+                    foreach ( var roleName in roles )
+                    {
+                        var role = await _roleManager.FindByNameAsync( roleName );
+                        roleClaims.AddRange( await _roleManager.GetClaimsAsync( role ) );
+                    }
+                    roleClaims = roleClaims.Distinct().ToList();
+
+                    foreach ( var roleClaim in roleClaims )
+                    {
+                        User.Claims.Append( new Claim( roleClaim.Type, roleClaim.Value ) );
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
