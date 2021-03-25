@@ -10,6 +10,7 @@ namespace ContosoUniv.WebApp.Authorization
         public class Admin
         {
             public const string RoleCreate = "Admin.RoleCreate";
+            public const string UserCreate = "Admin.UserCreate";
         }
 
         public class Student
@@ -31,6 +32,7 @@ namespace ContosoUniv.WebApp.Authorization
                 Instructor.ViewClassRoster,
 
                 Admin.RoleCreate,
+                Admin.UserCreate,
         };
     }
 }

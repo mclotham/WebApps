@@ -1,4 +1,5 @@
 ﻿using ContosoUniv.Data;
+using ContosoUniv.WebApp.Authorization;
 using ContosoUniv.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace ContosoUniv.WebApp.Controllers
             _dbContext = dbContext;
         }
 
+        [Authorize( Policy = Permits.Student.ViewGrades )]
         public IActionResult ViewGrades()
         {
             var model = new StudentViewGradesMdl( _dbContext );

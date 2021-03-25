@@ -1,5 +1,7 @@
 ﻿using ContosoUniv.Data;
+using ContosoUniv.WebApp.Authorization;
 using ContosoUniv.WebApp.Models.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +28,7 @@ namespace ContosoUniv.WebApp.Controllers.Admin
         }
 
         [HttpGet]
+        [Authorize( Policy = Permits.Admin.UserCreate )]
         public IActionResult Create()
         {
             var model = new UserCreateMdl();
@@ -36,6 +39,7 @@ namespace ContosoUniv.WebApp.Controllers.Admin
         }
 
         [HttpPost]
+        [Authorize( Policy = Permits.Admin.UserCreate )]
         public async Task<IActionResult> Create( UserCreateMdl model )
         {
             if ( model.SelectedPerson == "0" )
