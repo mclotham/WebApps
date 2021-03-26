@@ -20,7 +20,7 @@ namespace ContosoUniv.WebApp.Authorization
 
         public class Instructor
         {
-            public const string ViewClasses = "Instructor.ViewClasses";
+            public const string ViewCourses = "Instructor.ViewCourses";
             public const string ViewClassRoster = "Instructor.ViewClassRoster";
         }
 
@@ -28,7 +28,7 @@ namespace ContosoUniv.WebApp.Authorization
         {
                 Student.ViewGrades,
 
-                Instructor.ViewClasses,
+                Instructor.ViewCourses,
                 Instructor.ViewClassRoster,
 
                 Admin.RoleCreate,
