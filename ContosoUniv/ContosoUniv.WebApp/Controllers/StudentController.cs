@@ -20,12 +20,13 @@ namespace ContosoUniv.WebApp.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet]
         [Authorize( Policy = Permits.Student.ViewGrades )]
         public IActionResult ViewGrades()
         {
-            var model = new StudentViewGradesMdl( _dbContext );
+            var model = new StudentViewGradesMdl();
             model.Username = HttpContext.User.Identity.Name;
-            model.CreateGradeList();
+            model.CreateGradeList( _dbContext );
             return View( model );
         }
     }
