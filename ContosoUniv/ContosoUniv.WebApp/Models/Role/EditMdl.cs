@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace ContosoUniv.WebApp.Models.Role
 {
-    public class RoleCreateMdl
+    public class EditMdl
     {
-        [Required]
-        [Display(Name = "Role Name")]
-        public string RoleName { get; set; }
-
+        [Display( Name = "Role Name" )]
+        public string Name { get; set; }
+        public string Id { get; set; }
         public List<SelectListItem> PermitList { get; set; }
         public string SelectedPermits { get; set; }
 

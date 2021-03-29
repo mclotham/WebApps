@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContosoUniv.WebApp.Models.Role
 {
-    public class RoleManageMdl
+    public class ManageMdl
     {
         public List<RoleInfo> RoleInfoList { get; set; }
 
@@ -19,11 +19,15 @@ namespace ContosoUniv.WebApp.Models.Role
 
         public void LoadRoleInfo( ContosoUnivContext dbContext )
         {
-            var roleInfo =
-                from role in dbContext.AspNetRoles
-                select role;
-                
-
+            RoleInfoList = dbContext.AspNetRoles
+                .Select( role => new RoleInfo
+                {
+                    Id = role.Id,
+                    RoleName = role.Name,
+                    NumUsers = role.AspNetUserRoles.Count()
+                } )
+                .OrderBy( o => o.RoleName )
+                .ToList();
         }
     }
 }
