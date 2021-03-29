@@ -1,21 +1,22 @@
-﻿@model ContosoUniv.WebApp.Models.Role.CreateMdl
+﻿@model ContosoUniv.WebApp.Models.Role.EditMdl
 @{
-    ViewData["Title"] = "Create Role";
+    ViewData["Title"] = "Edit Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create Role</h1>
+<h1>Edit Role</h1>
 
 <hr />
 <div class="">
     <form id="mainForm" method="post">
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="Name" type="hidden" />
         <input asp-for="SelectedPermits" type="hidden" />
 
         <div class="form-group row">
             <label asp-for="Name" class="col-md-4"></label>
             <div class="col-md-8">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                @Model.Name
             </div>
         </div>
         <div class="form-group row">
@@ -39,7 +40,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-8">
                 <input type="submit" class="btn btn-primary" value="Submit" />
-                <input type="button" class="btn btn-secondary" value="Cancel" style="margin-left: 100px" onclick="javascript:window.location.href='@Url.Action( "Index", "Role" )'"/>
+                <input type="button" class="btn btn-secondary" value="Cancel" style="margin-left: 100px" onclick="javascript:window.location.href='@Url.Action( "Index", "Role" )'" />
             </div>
         </div>
     </form>

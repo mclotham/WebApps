@@ -1,0 +1,49 @@
+﻿@model ContosoUniv.WebApp.Models.Role.ManageMdl
+@{
+    ViewData["Title"] = "Roles";
+}
+<h2>Roles</h2>
+<hr />
+<a asp-action="Create">Create new role</a>
+<br /><br />
+@if ( Model.RoleInfoList == null )
+{
+    <p>No roles found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Users</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        @foreach ( var role in Model.RoleInfoList )
+        {
+            <tr>
+                <td>
+                    @role.RoleName
+                </td>
+                <td>
+                    @role.NumUsers
+                </td>
+                <td>
+                    <a class="actions-right-margin" asp-action="Details" asp-route-id="@role.Id">Details</a>
+                    <a class="actions-right-margin" asp-action="Edit" asp-route-id="@role.Id">Edit</a>
+                    @if ( role.NumUsers == 0 )
+                    {
+                        <a class="actions" asp-action="Delete" asp-route-id="@role.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<style>
+.actions-right-margin {
+    margin-right: 10px;
+}
+</style>
