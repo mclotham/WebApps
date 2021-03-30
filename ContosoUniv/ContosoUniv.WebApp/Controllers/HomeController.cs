@@ -13,12 +13,10 @@ namespace ContosoUniv.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ContosoUnivContext _dbContext;
 
         public HomeController( ILogger<HomeController> logger, ContosoUnivContext dbContext )
         {
             _logger = logger;
-            _dbContext = dbContext;
         }
 
         public IActionResult Index()

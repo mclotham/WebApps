@@ -14,8 +14,8 @@ namespace ContosoUniv.WebApp.Controllers
 {
     public class RoleController : Controller
     {
-        private ContosoUnivContext _dbContext;
-        private RoleManager<IdentityRole> _roleManager;
+        private readonly ContosoUnivContext _dbContext;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RoleController( ContosoUnivContext dbContext, RoleManager<IdentityRole> roleManager )
         {
@@ -81,8 +81,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleEdit )]
         public async Task<IActionResult> Edit( string id)
         {
-            var model = new EditMdl();
-            model.Id = id;
+            var model = new EditMdl { Id = id };
 
             var role = await _roleManager.FindByIdAsync( id );
             model.Name = role.Name;
@@ -132,8 +131,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleDelete )]
         public async Task<IActionResult> Delete( string id )
         {
-            var model = new DeleteMdl();
-            model.Id = id;
+            var model = new DeleteMdl { Id = id };
 
             var role = await _roleManager.FindByIdAsync( id );
             model.Name = role.Name;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContosoUniv.WebApp.Models
 {
-    public class StudentViewGradesMdl
+    public class ViewGradesMdl
     {
         public class GradeInfo
         {

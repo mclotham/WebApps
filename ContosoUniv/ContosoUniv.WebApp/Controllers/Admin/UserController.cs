@@ -13,8 +13,8 @@ namespace ContosoUniv.WebApp.Controllers.Admin
 {
     public class UserController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
-        private ContosoUnivContext _dbContext;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ContosoUnivContext _dbContext;
 
         public UserController( ContosoUnivContext dbContext, UserManager<IdentityUser> userManager )
         {

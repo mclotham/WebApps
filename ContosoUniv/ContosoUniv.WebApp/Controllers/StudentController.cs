@@ -13,7 +13,7 @@ namespace ContosoUniv.WebApp.Controllers
     [Authorize]
     public class StudentController : Controller
     {
-        private ContosoUnivContext _dbContext;
+        private readonly ContosoUnivContext _dbContext;
 
         public StudentController( ContosoUnivContext dbContext )
         {
@@ -24,8 +24,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Student.ViewGrades )]
         public IActionResult ViewGrades()
         {
-            var model = new StudentViewGradesMdl();
-            model.Username = HttpContext.User.Identity.Name;
+            var model = new ViewGradesMdl { Username = User.Identity.Name };
             model.CreateGradeList( _dbContext );
             return View( model );
         }
