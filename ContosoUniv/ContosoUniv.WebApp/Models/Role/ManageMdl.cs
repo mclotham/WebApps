@@ -24,7 +24,7 @@ namespace ContosoUniv.WebApp.Models.Role
                 {
                     Id = role.Id,
                     RoleName = role.Name,
-                    NumUsers = role.AspNetUserRoles.Count()
+                    NumUsers = role.AspNetUserRoles.Count
                 } )
                 .OrderBy( o => o.RoleName )
                 .ToList();

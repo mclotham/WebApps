@@ -12,7 +12,7 @@ namespace ContosoUniv.WebApp.Controllers
 {
     public class InstructorController : Controller
     {
-        private ContosoUnivContext _dbContext;
+        private readonly ContosoUnivContext _dbContext;
         public InstructorController( ContosoUnivContext dbContext)
         {
             _dbContext = dbContext;
@@ -27,8 +27,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Instructor.ViewCourses )]
         public IActionResult ViewCourses()
         {
-            var model = new InstructorViewCoursesMdl();
-            model.Username = User.Identity.Name;
+            var model = new ViewCoursesMdl { Username = User.Identity.Name };
             model.LoadCourseInfo( _dbContext );
             return View( model );
         }

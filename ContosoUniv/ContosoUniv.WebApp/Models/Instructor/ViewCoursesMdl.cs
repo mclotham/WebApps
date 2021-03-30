@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContosoUniv.WebApp.Models.Instructor
 {
-    public class InstructorViewCoursesMdl
+    public class ViewCoursesMdl
     {
         public string Username { get; set; }
         public string IdentityId { get; set; }
