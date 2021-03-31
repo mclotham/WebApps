@@ -35,26 +35,6 @@ namespace ContosoUniv.WebApp.Authorization
             public const string ViewClassRoster = "Instructor.ViewClassRoster";
         }
 
-        public static readonly string[] AllPermits =
-        {
-                Student.ViewGrades,
-
-                Instructor.ViewCourses,
-                Instructor.ViewClassRoster,
-
-                Admin.RoleCreate,
-                Admin.RoleManage,
-                Admin.RoleDetails,
-                Admin.RoleEdit,
-                Admin.RoleDelete,
-
-                Admin.UserCreate,
-                Admin.UserManage,
-                Admin.UserDetails,
-                Admin.UserEdit,
-                Admin.UserDelete,
-        };
-
         public static List<string> GetAllPermits()
         {
             List<string> allPermits = new();
