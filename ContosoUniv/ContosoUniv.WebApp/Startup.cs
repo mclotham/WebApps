@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContosoUniv.WebApp
 {
@@ -48,9 +49,11 @@ namespace ContosoUniv.WebApp
 #endif
             services.AddAuthorization( options =>
             {
-                foreach ( var claim in Permits.AllPermits )
-                    options.AddPolicy( claim, policy => policy.RequireClaim( claim ) );
+                foreach ( var claim in Permits.GetAllPermits() )
+                    options.AddPolicy( claim, policy => policy.AddRequirements( new RoleClaimRequirement( claim ) ) );
             } );
+
+            services.AddTransient<IAuthorizationHandler, RoleClaimHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

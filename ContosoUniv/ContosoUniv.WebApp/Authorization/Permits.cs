@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ContosoUniv.WebApp.Authorization
@@ -53,5 +54,22 @@ namespace ContosoUniv.WebApp.Authorization
                 Admin.UserEdit,
                 Admin.UserDelete,
         };
+
+        public static List<string> GetAllPermits()
+        {
+            List<string> allPermits = new();
+            var permitClassType = typeof( Permits );
+            var subClasses = permitClassType.GetMembers().Where( pc => pc.MemberType == MemberTypes.NestedType );
+            foreach ( var subClass in subClasses )
+            {
+                var subClassType = Type.GetType( permitClassType.FullName + "+" + subClass.Name );
+                var permitFields = subClassType.GetFields();
+                foreach ( var permitField in permitFields )
+                    allPermits.Add( permitField.GetValue( permitField ) as string);
+            }
+
+            allPermits.Sort();
+            return allPermits;
+        }
     }
 }
