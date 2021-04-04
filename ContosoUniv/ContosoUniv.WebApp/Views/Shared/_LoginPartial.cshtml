@@ -1,10 +1,38 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using ContosoUniv.WebApp.Authorization;
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    if( User.HasClaim( Permits.Admin.UserCreate, "" ))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="Create" asp-controller="User">Create User</a>
+        </li>
+    }
+    if( User.HasClaim( Permits.Admin.RoleManage, "" ))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="Index" asp-controller="Role">Roles</a>
+        </li>
+    }
+    if( User.HasClaim( Permits.Instructor.ViewCourses, ""))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="ViewCourses" asp-controller="Instructor">View Courses</a>
+        </li>
+    }
+    if( User.HasClaim( Permits.Student.ViewGrades, ""))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="ViewGrades" asp-controller="Student">View Grades</a>
+        </li>
+    }
+    <li class="nav-item">
+        <span class="navbar-text text-dark">|</span>
+    </li>
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
     </li>
