@@ -49,8 +49,8 @@ namespace ContosoUniv.WebApp
 #endif
             services.AddAuthorization( options =>
             {
-                foreach ( var claim in Permits.AllPermits )
-                    options.AddPolicy( claim, policy => policy.RequireClaim( claim ) );
+                foreach ( var claim in Permits.GetAllPermits() )
+                    options.AddPolicy( claim, policy => policy.AddRequirements( new RoleClaimRequirement( claim ) ) );
             } );
 
             services.AddScoped<IClaimsTransformation, RoleClaimTransformer>();

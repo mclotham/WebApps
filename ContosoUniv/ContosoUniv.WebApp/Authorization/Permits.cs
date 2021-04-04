@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ContosoUniv.WebApp.Authorization
@@ -34,24 +35,21 @@ namespace ContosoUniv.WebApp.Authorization
             public const string ViewClassRoster = "Instructor.ViewClassRoster";
         }
 
-        public static readonly string[] AllPermits =
+        public static List<string> GetAllPermits()
         {
-                Student.ViewGrades,
+            List<string> allPermits = new();
+            var permitClassType = typeof( Permits );
+            var subClasses = permitClassType.GetMembers().Where( pc => pc.MemberType == MemberTypes.NestedType );
+            foreach ( var subClass in subClasses )
+            {
+                var subClassType = Type.GetType( permitClassType.FullName + "+" + subClass.Name );
+                var permitFields = subClassType.GetFields();
+                foreach ( var permitField in permitFields )
+                    allPermits.Add( permitField.GetValue( permitField ) as string);
+            }
 
-                Instructor.ViewCourses,
-                Instructor.ViewClassRoster,
-
-                Admin.RoleCreate,
-                Admin.RoleManage,
-                Admin.RoleDetails,
-                Admin.RoleEdit,
-                Admin.RoleDelete,
-
-                Admin.UserCreate,
-                Admin.UserManage,
-                Admin.UserDetails,
-                Admin.UserEdit,
-                Admin.UserDelete,
-        };
+            allPermits.Sort();
+            return allPermits;
+        }
     }
 }

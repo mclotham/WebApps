@@ -21,7 +21,7 @@ namespace ContosoUniv.WebApp.Models.Role
         {
             selectedItems ??= "";
             var selectedList = selectedItems.Split( new char[] { ';' } );
-            PermitList = Permits.AllPermits.Select( p => new SelectListItem
+            PermitList = Permits.GetAllPermits().Select( p => new SelectListItem
             {
                 Text = p,
                 Value = p.Replace( '.', '_' ),
