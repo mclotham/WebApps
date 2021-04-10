@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContosoUniv.WebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
+using System.Text;
 
 namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
 {
@@ -19,16 +21,19 @@ namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -85,6 +90,12 @@ namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation($"User {User.Identity.Name} logged in.");
+
+                    var menuMdl = new MenuMdl( _userManager, _roleManager, Input.Username );
+                    menuMdl.CreateHtmlMenu();
+                    _logger.LogInformation( menuMdl.HtmlListItems );
+                    HttpContext.Session.Set( "AuthorizedMenu", Encoding.ASCII.GetBytes( menuMdl.HtmlListItems ) );
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

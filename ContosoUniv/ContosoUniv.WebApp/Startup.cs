@@ -42,11 +42,23 @@ namespace ContosoUniv.WebApp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession( options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds( 3600 );
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            } );
+
             services.AddControllersWithViews();
 
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
+#else
+            services.AddRazorPages();
 #endif
+
             services.AddAuthorization( options =>
             {
                 foreach ( var claim in Permits.GetAllPermits() )
@@ -77,6 +89,8 @@ namespace ContosoUniv.WebApp
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints( endpoints =>
              {
