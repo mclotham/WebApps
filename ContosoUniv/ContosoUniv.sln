@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniv.Data", "ContosoUniv.Data\ContosoUniv.Data.csproj", "{9D965A30-589C-43AD-BD44-83EF707D31BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniv.Data", "ContosoUniv.Data\ContosoUniv.Data.csproj", "{9D965A30-589C-43AD-BD44-83EF707D31BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniv.WebApp", "ContosoUniv.WebApp\ContosoUniv.WebApp.csproj", "{0C39119A-7832-47AC-AFAA-A7FA4302B387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniv.WebApp", "ContosoUniv.WebApp\ContosoUniv.WebApp.csproj", "{0C39119A-7832-47AC-AFAA-A7FA4302B387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniv.WebAppRp", "ContosoUniv.WebAppRp\ContosoUniv.WebAppRp.csproj", "{687F1280-6C71-46AD-BE91-651C44C6D3FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0C39119A-7832-47AC-AFAA-A7FA4302B387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C39119A-7832-47AC-AFAA-A7FA4302B387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C39119A-7832-47AC-AFAA-A7FA4302B387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687F1280-6C71-46AD-BE91-651C44C6D3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687F1280-6C71-46AD-BE91-651C44C6D3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687F1280-6C71-46AD-BE91-651C44C6D3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687F1280-6C71-46AD-BE91-651C44C6D3FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
