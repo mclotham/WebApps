@@ -1,4 +1,4 @@
-using ContosoUniv.WebApp.Authorization;
+using ContosoUniv.Authorization;
 using ContosoUniv.Data;
 using ContosoUniv.WebApp.Data;
 using Microsoft.AspNetCore.Builder;
@@ -53,7 +53,7 @@ namespace ContosoUniv.WebApp
                     options.AddPolicy( claim, policy => policy.RequireClaim( claim ) );
             } );
 
-            services.AddScoped<IClaimsTransformation, RoleClaimTransformer>();
+//            services.AddScoped<IClaimsTransformation, RoleClaimTransformer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

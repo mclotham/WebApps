@@ -1,5 +1,5 @@
 ﻿using ContosoUniv.Data;
-using ContosoUniv.WebApp.Authorization;
+using ContosoUniv.Authorization;
 using ContosoUniv.WebApp.Models.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

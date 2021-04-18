@@ -1,5 +1,5 @@
 ﻿using ContosoUniv.Data;
-using ContosoUniv.WebApp.Authorization;
+using ContosoUniv.Authorization;
 using ContosoUniv.WebApp.Models.Instructor;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;

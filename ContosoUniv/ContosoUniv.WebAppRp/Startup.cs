@@ -1,3 +1,5 @@
+using ContosoUniv.Authorization;
+using ContosoUniv.Data;
 using ContosoUniv.WebAppRp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,10 +32,24 @@ namespace ContosoUniv.WebAppRp
             services.AddDbContext<ApplicationDbContext>( options =>
                  options.UseSqlServer(
                      Configuration.GetConnectionString( "DefaultConnection" ) ) );
+
+            services.AddDbContext<ContosoUnivContext>( options =>
+                 options.UseSqlServer(
+                     Configuration.GetConnectionString( "DefaultConnection" ) ) );
+
             services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddDefaultIdentity<IdentityUser>( options => options.SignIn.RequireConfirmedAccount = false )
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddRazorPages();
+
+            services.AddAuthorization( options =>
+            {
+                foreach ( var claim in Permits.GetAllPermits() )
+                    options.AddPolicy( claim, policy => policy.RequireClaim( claim ) );
+            } );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

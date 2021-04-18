@@ -1,4 +1,4 @@
-﻿using ContosoUniv.WebApp.Authorization;
+﻿using ContosoUniv.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
