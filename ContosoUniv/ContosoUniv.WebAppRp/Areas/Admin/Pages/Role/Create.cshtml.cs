@@ -17,15 +17,13 @@ namespace ContosoUniv.WebAppRp.Areas.Admin.Pages.Role
     public class CreateModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ContosoUnivContext _dbContext;
 
         [BindProperty]
         public CreateInputMdl Input { get; set; }
 
-        public CreateModel( RoleManager<IdentityRole> roleManager, ContosoUnivContext dbContext )
+        public CreateModel( RoleManager<IdentityRole> roleManager )
         {
             _roleManager = roleManager;
-            _dbContext = dbContext;
         }
 
         public void OnGet()
@@ -47,7 +45,7 @@ namespace ContosoUniv.WebAppRp.Areas.Admin.Pages.Role
                         result = await _roleManager.AddClaimAsync( role, new Claim( permit.Replace( '_', '.' ), "" ) );
                     }
                 }
-                return Redirect( Url.Content( "~/" ) );
+                return RedirectToPage( "Index" );
             }
             else
             {

@@ -1,0 +1,52 @@
+﻿@page
+@model ContosoUniv.WebAppRp.Areas.Admin.Pages.Role.IndexModel
+@{
+    ViewData["Title"] = "Manage Roles";
+}
+
+<h2>Roles</h2>
+<hr />
+<a asp-page="./Create">Create new role</a>
+<br />
+<br />
+@if ( Model.Input.RoleInfoList == null || !Model.Input.RoleInfoList.Any() )
+{
+    <p>No roles found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Users</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        @foreach ( var role in Model.Input.RoleInfoList )
+        {
+            <tr>
+                <td>
+                    @role.RoleName
+                </td>
+                <td>
+                    @role.NumUsers
+                </td>
+                <td>
+                    <a class="actions-right-margin" asp-page="./Details" asp-route-id="@role.Id">Details</a>
+                    <a class="actions-right-margin" asp-page="./Edit" asp-route-id="@role.Id">Edit</a>
+                    @if ( role.NumUsers == 0 )
+                    {
+                        <a class="actions" asp-page="./Delete" asp-route-id="@role.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<style>
+    .actions-right-margin {
+        margin-right: 10px;
+    }
+</style>

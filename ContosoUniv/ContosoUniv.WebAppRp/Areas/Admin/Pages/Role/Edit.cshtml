@@ -1,27 +1,28 @@
 ﻿@page
-@model ContosoUniv.WebAppRp.Areas.Admin.Pages.Role.CreateModel
+@model ContosoUniv.WebAppRp.Areas.Admin.Pages.Role.EditModel
 @{
-    ViewData["Title"] = "Create Role";
+    ViewData["Title"] = "Edit Role";
 }
 
-<h1>Create Role</h1>
+<h1>Edit Role</h1>
 
 <hr />
 <div class="">
     <form id="mainForm" method="post">
+        <input asp-for="Input.Id" type="hidden" />
+        <input asp-for="Input.Name" type="hidden" />
         <input asp-for="Input.SelectedPermits" type="hidden" />
 
         <div class="form-group row">
             <label asp-for="Input.Name" class="col-md-4"></label>
             <div class="col-md-8">
-                <input asp-for="Input.Name" class="form-control" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                @Model.Input.Name
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-4">Permissions</label>
             <div class="col-md-8">
-                @foreach ( var permit in Model.Input.PermitList @*ViewData["PermitList"] as List<SelectListItem>*@ )
+                @foreach ( var permit in Model.Input.PermitList )
                 {
                     @if ( permit.Selected )
                     {
@@ -47,10 +48,8 @@
 
 @section Scripts {
     <script>
-        $("#mainForm").submit(function mainForm_submit() {
-            $("#Input_SelectedPermits").val($(".permit-cbx:checked").map(function () { return this.id }).get().join(";"))
-        })
+    $("#mainForm").submit(function mainForm_submit() {
+        $("#Input_SelectedPermits").val($(".permit-cbx:checked").map(function () { return this.id }).get().join(";"))
+    })
     </script>
-
-    <partial name="_ValidationScriptsPartial" />
 }

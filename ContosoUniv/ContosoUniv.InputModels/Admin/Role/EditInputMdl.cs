@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ContosoUniv.InputModels.Admin.Models.Role
+namespace ContosoUniv.InputModels.Admin.Role
 {
     public class EditInputMdl
     {
