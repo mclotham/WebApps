@@ -67,7 +67,6 @@ namespace ContosoUniv.WebAppRp.Areas.Admin.Pages.Role
             }
 
             return RedirectToPage( "Index" );
-
         }
     }
 }
