@@ -22,6 +22,11 @@
   <ItemGroup>
     <ProjectReference Include="..\ContosoUniv.Authorizaion\ContosoUniv.Authorizaion.csproj" />
     <ProjectReference Include="..\ContosoUniv.Data\ContosoUniv.Data.csproj" />
+    <ProjectReference Include="..\ContosoUniv.InputModels\ContosoUniv.InputModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Pages\User\" />
   </ItemGroup>
 
 </Project>
