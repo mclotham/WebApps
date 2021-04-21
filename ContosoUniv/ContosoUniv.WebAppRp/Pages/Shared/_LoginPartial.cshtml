@@ -1,26 +1,51 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using ContosoUniv.Authorization
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+    @if ( SignInManager.IsSignedIn( User ) )
+    {
+        if ( User.HasClaim( Permits.Admin.UserCreate, "" ) )
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Admin" asp-page="/User/Create">Create User</a>
+            </li>
+        }
+        if ( User.HasClaim( Permits.Admin.RoleManage, "" ) )
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Admin" asp-page="/Role/Index">Roles</a>
+            </li>
+        }
+        if ( User.HasClaim( Permits.Instructor.ViewCourses, "" ) )
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Instructor" asp-page="/ViewCourses">View Courses</a>
+            </li>
+        }
+        if ( User.HasClaim( Permits.Student.ViewGrades, "" ) )
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Student" asp-page="/ViewGrades">View Grades</a>
+            </li>
+        }
+        <li class="nav-item">
+            <span class="navbar-text text-dark">|</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
 </ul>

@@ -84,7 +84,7 @@ namespace ContosoUniv.WebApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation($"User {User.Identity.Name} logged in.");
+                    _logger.LogInformation($"User {Input.Username} logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
