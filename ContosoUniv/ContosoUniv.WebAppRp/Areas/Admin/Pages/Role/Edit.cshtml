@@ -48,8 +48,10 @@
 
 @section Scripts {
     <script>
-    $("#mainForm").submit(function mainForm_submit() {
-        $("#Input_SelectedPermits").val($(".permit-cbx:checked").map(function () { return this.id }).get().join(";"))
-    })
+        $("#mainForm").submit(function mainForm_submit() {
+            $("#Input_SelectedPermits").val($(".permit-cbx:checked").map(function () { return this.id }).get().join(";"))
+        })
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }

@@ -60,9 +60,11 @@
 </div>
 
 @section Scripts {
-<script>
-    $("#mainForm").submit(function mainForm_submit() {
-        $("#SelectedRoles").val($(".role-cbx:checked").map(function () { return this.id }).get().join(";"))
-    })
-</script>
+    <script>
+        $("#mainForm").submit(function mainForm_submit() {
+            $("#SelectedRoles").val($(".role-cbx:checked").map(function () { return this.id }).get().join(";"))
+        })
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }
