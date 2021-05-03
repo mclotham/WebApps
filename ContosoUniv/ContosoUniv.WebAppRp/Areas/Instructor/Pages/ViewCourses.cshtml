@@ -1,0 +1,40 @@
+﻿@page
+@model ContosoUniv.WebAppRp.Areas.Instructor.Pages.ViewCoursesModel
+@{
+    ViewData["Title"] = "View Courses";
+}
+
+<h2>My Courses</h2>
+<hr />
+<h5>@Model.Input.FullName</h5>
+<br />
+@if ( Model.Input.CourseList == null )
+{
+    <p>No courses found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Credits</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        @foreach ( var course in Model.Input.CourseList )
+        {
+            <tr>
+                <td>
+                    @course.CourseName
+                </td>
+                <td>
+                    @course.NumCredits
+                </td>
+                <td>
+                    @course.Department
+                </td>
+            </tr>
+        }
+    </table>
+}

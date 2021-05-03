@@ -1,0 +1,36 @@
+﻿@page
+@model ContosoUniv.WebAppRp.Areas.Student.Pages.ViewGradesModel
+@{
+    ViewData["Title"] = "Grades";
+}
+
+<h2>My Grades</h2>
+<hr />
+<h5>@Model.Input.FullName</h5>
+<br />
+@if ( Model.Input.GradeList == null )
+{
+    <p>No grades found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        @foreach ( var grade in Model.Input.GradeList )
+        {
+            <tr>
+                <td>
+                    @grade.CourseName
+                </td>
+                <td>
+                    @grade.Grade
+                </td>
+            </tr>
+        }
+    </table>
+}
