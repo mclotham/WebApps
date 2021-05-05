@@ -1,12 +1,12 @@
 ﻿using ContosoUniv.Data;
 using ContosoUniv.Authorization;
-using ContosoUniv.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniv.InputModels.Student;
 
 namespace ContosoUniv.WebApp.Controllers
 {
@@ -24,7 +24,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Student.ViewGrades )]
         public IActionResult ViewGrades()
         {
-            var model = new ViewGradesMdl { Username = User.Identity.Name };
+            var model = new ViewGradesInputMdl { Username = User.Identity.Name };
             model.CreateGradeList( _dbContext );
             return View( model );
         }

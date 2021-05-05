@@ -1,6 +1,6 @@
 ﻿using ContosoUniv.Data;
 using ContosoUniv.Authorization;
-using ContosoUniv.WebApp.Models.Role;
+using ContosoUniv.InputModels.Admin.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleManage )]
         public IActionResult Index()
         {
-            var model = new ManageMdl();
+            var model = new ManageInputMdl();
             model.LoadRoleInfo( _dbContext );
             return View( model );
         }
@@ -36,7 +36,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleDetails )]
         public IActionResult Details( string id )
         {
-            var model = new DetailsMdl { Id = id };
+            var model = new DetailsInputMdl { Id = id };
             model.LoadDetails( _dbContext );
             return View( model );
         }
@@ -45,7 +45,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleCreate )]
         public IActionResult Create()
         {
-            var model = new CreateMdl();
+            var model = new CreateInputMdl();
             model.LoadPermitList();
 
             return View( model );
@@ -53,7 +53,7 @@ namespace ContosoUniv.WebApp.Controllers
 
         [HttpPost]
         [Authorize( Policy = Permits.Admin.RoleCreate )]
-        public async Task<IActionResult> Create( CreateMdl model )
+        public async Task<IActionResult> Create( CreateInputMdl model )
         {
             var role = new IdentityRole { Name = model.Name };
             var result = await _roleManager.CreateAsync( role );
@@ -81,7 +81,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleEdit )]
         public async Task<IActionResult> Edit( string id)
         {
-            var model = new EditMdl { Id = id };
+            var model = new EditInputMdl { Id = id };
 
             var role = await _roleManager.FindByIdAsync( id );
             model.Name = role.Name;
@@ -94,7 +94,7 @@ namespace ContosoUniv.WebApp.Controllers
 
         [HttpPost]
         [Authorize( Policy = Permits.Admin.RoleEdit )]
-        public async Task<IActionResult> Edit( EditMdl model )
+        public async Task<IActionResult> Edit( EditInputMdl model )
         {
             var selectedPermits = model.SelectedPermits.Split( new char[] { ';' } ).Select( p => p.Replace( '_', '.' ) );
             var role = await _roleManager.FindByIdAsync( model.Id );
@@ -131,7 +131,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Admin.RoleDelete )]
         public async Task<IActionResult> Delete( string id )
         {
-            var model = new DeleteMdl { Id = id };
+            var model = new DeleteInputMdl { Id = id };
 
             var role = await _roleManager.FindByIdAsync( id );
             model.Name = role.Name;
@@ -144,7 +144,7 @@ namespace ContosoUniv.WebApp.Controllers
 
         [HttpPost]
         [Authorize( Policy = Permits.Admin.RoleDelete )]
-        public async Task<IActionResult> Delete( DeleteMdl model)
+        public async Task<IActionResult> Delete( DeleteInputMdl model)
         {
             var role = await _roleManager.FindByIdAsync( model.Id );
             var result = await _roleManager.DeleteAsync( role );

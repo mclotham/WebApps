@@ -1,12 +1,12 @@
 ﻿using ContosoUniv.Data;
 using ContosoUniv.Authorization;
-using ContosoUniv.WebApp.Models.Instructor;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniv.InputModels.Instructor;
 
 namespace ContosoUniv.WebApp.Controllers
 {
@@ -27,7 +27,7 @@ namespace ContosoUniv.WebApp.Controllers
         [Authorize( Policy = Permits.Instructor.ViewCourses )]
         public IActionResult ViewCourses()
         {
-            var model = new ViewCoursesMdl { Username = User.Identity.Name };
+            var model = new ViewCoursesInputMdl { Username = User.Identity.Name };
             model.LoadCourseInfo( _dbContext );
             return View( model );
         }
